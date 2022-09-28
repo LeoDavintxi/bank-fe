@@ -2,21 +2,15 @@
     <div class="consultar_paciente">
         <div class="contenido_consultar_paciente">
             <form class="formulario_consultar_paciente" v-on:submit.prevent="consultarUnPaciente">
-                <label >ID: </label>
                 <input v-model="registro.id" type="text" placeholder="ID de Usuario">
                 <button type="submit">Consultar</button>
             </form><br><br>
-
-
-            <label>Nombre: </label><input type="text" v-model="registro.nombre" ><br>
-            <label>Apellido: </label><input type="text" v-model="registro.apellido" ><br>
-            <label>Direccion: </label><input type="text" v-model="registro.direccion" ><br>
-            <label>Correo: </label><input type="text" v-model="registro.correo" ><br>
-            <label>Nombre Usuario: </label><input type="text" v-model="registro.user_name" ><br>
-            <label>ID ROL: </label><input type="text" v-model="registro.id_rol" ><br>
-        
-
-
+            <label>Nombre: </label><input type="text" v-model="registro.nombre"><br>
+            <label>Apellido: </label><input type="text" v-model="registro.apellido"><br>
+            <label>Direccion: </label><input type="text" v-model="registro.direccion"><br>
+            <label>Correo: </label><input type="text" v-model="registro.correo"><br>
+            <label>Nombre Usuario: </label><input type="text" v-model="registro.user_name"><br>
+            <label>ID ROL: </label><input type="text" v-model="registro.id_rol"><br>
         </div>
     </div>
 
@@ -100,23 +94,29 @@ body {
     border: 3px solid #283747;
     border-radius: 20px;
     width: 40%;
-    height: 80%;
+    height: 45%;
     padding: 10px;
     background: white;
 }
 
 .formulario_consultar_paciente {
-    width: 50%;
+    width: 100%;
+    display: flex;
 }
 
+.contenido_consultar_paciente label {
+    display: inline-block;
+    width: 38%;
+}
 
 .contenido_consultar_paciente button {
     width: 50%;
+    height: 30px;
     color: #E5E7E9;
     background: #2B63A0;
     border: 1px solid #E5E7E9;
     border-radius: 5px;
-    padding: 10px 20px;
+    padding: 0px 0px;
 }
 
 .contenido_consultar_paciente button:hover {
@@ -125,6 +125,6 @@ body {
 }
 
 .contenido_consultar_paciente input {
-    width: 50%;
+    width: 60%;
 }
 </style>
