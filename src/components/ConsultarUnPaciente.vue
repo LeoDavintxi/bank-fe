@@ -126,5 +126,6 @@ body {
 
 .contenido_consultar_paciente input {
     width: 60%;
+    
 }
 </style>
