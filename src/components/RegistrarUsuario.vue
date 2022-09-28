@@ -1,0 +1,121 @@
+<template>
+    <div class="registro_usuario">
+        <div class="contenido_registro_usuario">
+            <form class="formulario" v-on:submit.prevent="registroUsuario">
+                <input type="text" v-model="usuario.nombre" placeholder="Nombre"><br>
+                <input type="text" v-model="usuario.apellido" placeholder="Apellido"><br>
+                <input type="text" v-model="usuario.direccion" placeholder="Direccion"><br>
+                <input type="text" v-model="usuario.correo" placeholder="Correo"><br>
+                <input type="text" v-model="usuario.user_name" placeholder="Username"><br>
+                <input type="password" v-model="usuario.password" placeholder="Password"><br>
+                <select v-model="usuario.id_rol" class="selector_rol" placeholder="Seleccione el rol del Usuario...">
+                    <option value="1">Administrador</option>
+                    <option value="2">Paciente</option>
+                    <option value="3">Medico</option>
+                    <option value="4">Enfermero</option>
+                    <option value="4">Familiar</option>
+                </select><br><br>
+                <button type="submit">Registrarse</button>
+            </form>
+            <h5>Mintic Equipo 4<br>Todos los derechos reservados - 2022</h5>
+        </div>
+    </div>
+
+</template>
+
+
+<script>
+import axios from 'axios';
+export default {
+    name: 'registrarUsuario',
+
+    data: function () {
+        return {
+            usuario: {
+                nombre: "",
+                apellido: "",
+                direccion: "",
+                correo: "",
+                user_name: "",
+                password: "",
+                id_registro: "1"
+            }
+        }
+    },
+
+    methods: {
+        registroUsuario: function (event) {
+            const url = "http://127.0.0.1:8000/user/";
+            axios.post(url, this.usuario)
+                .then((result) => {
+                    alert("Registro Exitoso: " + result.status);
+                    event.target.reset();
+                })
+                .catch((error) => {
+                    alert("ERROR: Fallo en el registro: " + error);
+                });
+        }
+    },
+
+    created: function () {
+    }
+}
+</script>
+
+
+<style>
+body {
+    margin: 0 0 0 0;
+}
+
+.registro_usuario {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenido_registro_usuario {
+    border: 3px solid #283747;
+    border-radius: 20px;
+    width: 40%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
+
+.formulario {
+    width: 60%;
+}
+
+
+.contenido_registro_usuario button {
+    width: 100%;
+    color: #E5E7E9;
+    background: #2B63A0;
+    border: 1px solid #E5E7E9;
+
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+.contenido_registro_usuario button:hover {
+    color: white;
+    border: 3px solid #E5E7E9;
+}
+
+.contenido_registro_usuario input,
+.selector_rol {
+    width: 100%;
+}
+
+.contenido_registro_usuario h5 {
+    text-align: center;
+}
+</style>
