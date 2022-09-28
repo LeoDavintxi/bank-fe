@@ -39,7 +39,8 @@ export default {
     methods: {
         consultarUnPaciente: function () {
             const url = "http://127.0.0.1:8000/usuario/" + this.registro.id + "/";
-            axios.get(url).then((result) => {
+            axios.get(url)
+            .then((result) => {
                 this.registro.id = "";
                 this.registro.id_rol = result.data.id_rol;
                 if (this.registro.id_rol == "2") {
@@ -126,6 +127,6 @@ body {
 
 .contenido_consultar_paciente input {
     width: 60%;
-    
+
 }
 </style>

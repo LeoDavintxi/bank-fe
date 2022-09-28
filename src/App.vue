@@ -5,7 +5,7 @@
       <img class="logo" src="http://drive.google.com/uc?export=view&id=10esmGfVLdrKg-d_xsGhXBzy8gJpYleUX">
       <nav>
         <button class="boton-nav-funciones" v-on:click="registrarUsuarios">Registrar Usuarios</button>
-        <button class="boton-nav-funciones" v-on:click="loadAccount">Consultar Pacientes</button>
+        <button class="boton-nav-funciones" v-on:click="consultarPacientes">Consultar Pacientes</button>
         <button class="boton-nav-funciones" v-on:click="consultarUnPaciente">Consultar un Paciente</button>
         <button class="boton-nav-salir" v-on:click="loadLogIn">Salir</button>
       </nav>
@@ -81,8 +81,8 @@ export default {
       this.$router.push({ name: "consultarUnPaciente" });
     },
 
-    loadAccount: function () {
-      this.$router.push({ name: "account" });
+    consultarPacientes: function () {
+      this.$router.push({ name: "consultarPacientes" });
     },
 
     logOut: function () {

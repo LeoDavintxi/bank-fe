@@ -6,6 +6,7 @@ import SignUp from './components/SignUp.vue'
 import RegistrarUsuario from './components/RegistrarUsuario.vue'
 import Account from './components/Account.vue'
 import ConsultarUnPaciente from './components/ConsultarUnPaciente.vue'
+import ConsultarPacientes from './components/ConsultarPacientes.vue'
 
 
 const routes = [{
@@ -32,6 +33,11 @@ const routes = [{
         path: '/user/consultarunpaciente',
         name: "consultarUnPaciente",
         component: ConsultarUnPaciente
+    },
+    {
+        path: '/user/consultarpacientes',
+        name: "consultarPacientes",
+        component: ConsultarPacientes
     },
     {
         path: '/user/account',
