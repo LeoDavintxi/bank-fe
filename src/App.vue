@@ -1,15 +1,15 @@
 <template>
   <div id="app" class="app">
-
     <div class="header">
-      <img class="logo" src="http://drive.google.com/uc?export=view&id=10esmGfVLdrKg-d_xsGhXBzy8gJpYleUX">
-      <nav>
-        <button class="boton-nav-funciones" v-on:click="registrarUsuarios">Registrar Usuarios</button>
-        <button class="boton-nav-funciones" v-on:click="consultarPacientes">Consultar Pacientes</button>
-        <button class="boton-nav-funciones" v-on:click="consultarUnPaciente">Consultar un Paciente</button>
+      <div class="container">
+        <div class="btn-menu">
+          <label for="btn-menu">☰</label>
+        </div>
+        <img class="logo" src="http://drive.google.com/uc?export=view&id=10esmGfVLdrKg-d_xsGhXBzy8gJpYleUX">
         <button class="boton-nav-salir" v-on:click="loadLogIn">Salir</button>
-      </nav>
+      </div>
     </div>
+
 
 
     <div class="main-component">
@@ -19,14 +19,23 @@
 
 
     <div class="footer">
-      <h2>MisiónTIC 2022 - Equipo 4 Ciclo 3</h2>
+      <h2>Derechos Reservados 2022 - Ciclo 3 Equipo 4</h2>
     </div>
 
   </div>
+
+  <input type="checkbox" id="btn-menu">
+  <div class="container-menu">
+    <div class="cont-menu">
+      <nav>
+        <a v-on:click="registrarUsuarios">Registrar Usuarios</a>
+        <a v-on:click="consultarPacientes">Consultar Pacientes</a>
+        <a v-on:click="consultarUnPaciente">Consultar un Paciente</a>
+      </nav>
+      <label for="btn-menu">✖️</label>
+    </div>
+  </div>
 </template>
-
-
-
 
 <script>
 export default {
@@ -101,56 +110,33 @@ export default {
 
 
 
-
-
-
-
 <style>
 body {
   margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  box-sizing: border-box;
 }
 
 .header {
   margin: 0%;
   padding: 0;
   width: 100%;
-  height: 10vh;
-  min-height: 100px;
-
+  height: 15vh;
   background-color: #333333;
   color: #E5E7E9;
-
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.header nav {
-  height: 100%;
-  width: 45%;
-  margin: 10px;
-
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.boton-nav-funciones {
-  color: #E5E7E9;
-  background: #2B63A0;
-  border: 1px solid #E5E7E9;
-
-  border-radius: 5px;
-  padding: 10px 20px;
 }
 
 .boton-nav-salir {
   color: #E5E7E9;
   background: #DE3438;
   border: 1px solid #E5E7E9;
-
+  width: 150px;
   border-radius: 5px;
   padding: 10px 20px;
+  margin: 35px;
+  float: right;
+  
 }
 
 .header nav button:hover {
@@ -158,10 +144,9 @@ body {
   border: 3px solid #E5E7E9;
 }
 
-
 .main-component {
-  height: 70vh;
-
+  width: 100%;
+  height: 67vh;
 
 }
 
@@ -176,7 +161,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 10vh;
+  height: 15vh;
   background-color: #333333;
   color: #E5E7E9;
 
@@ -195,5 +180,120 @@ body {
 .logo {
   width: 15%;
   margin: 20px;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.container .btn-menu {
+  float: left;
+  line-height: 100px;
+}
+
+.container .btn-menu label {
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.container .btn-menu a {
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.logo h1 {
+  color: #fff;
+  font-weight: 400;
+  font-size: 22px;
+  margin-left: 10px;
+}
+
+.container .menu {
+  float: right;
+  line-height: 100px;
+}
+
+.container .menu a {
+  display: inline-block;
+  padding: 15px;
+  line-height: normal;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+  font-size: 15px;
+  margin-right: 5px;
+}
+
+.container .menu a:hover {
+  border-bottom: 2px solid #c7c7c7;
+  padding-bottom: 5px;
+}
+
+#btn-menu {
+  display: none;
+}
+
+.container-menu {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  transition: all 500ms ease;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#btn-menu:checked~.container-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cont-menu {
+  width: 100%;
+  max-width: 250px;
+  background: #1c1c1c;
+  height: 100vh;
+  position: relative;
+  transition: all 500ms ease;
+  transform: translateX(-100%);
+}
+
+#btn-menu:checked~.container-menu .cont-menu {
+  transform: translateX(0%);
+}
+
+.cont-menu nav {
+  transform: translateY(15%);
+}
+
+.cont-menu nav a {
+  display: block;
+  text-decoration: none;
+  padding: 20px;
+  color: #c7c7c7;
+  border-left: 5px solid transparent;
+  transition: all 400ms ease;
+  cursor: pointer;
+}
+
+.cont-menu nav a:hover {
+  border-left: 5px solid #c7c7c7;
+  background: #1f1f1f;
+}
+
+.cont-menu label {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
 }
 </style>

@@ -37,9 +37,7 @@
                         <td v-text="item.id_rol"></td>
                     </tr>
                 </table>
-
             </div>
-
         </div>
     </div>
 

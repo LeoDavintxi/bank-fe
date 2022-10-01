@@ -5,15 +5,17 @@
                 <input v-model="registro.id" type="text" placeholder="ID de Usuario">
                 <button type="submit">Consultar</button>
             </form><br><br>
-            <label>Nombre: </label><input type="text" v-model="registro.nombre"><br>
-            <label>Apellido: </label><input type="text" v-model="registro.apellido"><br>
-            <label>Direccion: </label><input type="text" v-model="registro.direccion"><br>
-            <label>Correo: </label><input type="text" v-model="registro.correo"><br>
-            <label>Nombre Usuario: </label><input type="text" v-model="registro.user_name"><br>
-            <label>ID ROL: </label><input type="text" v-model="registro.id_rol"><br>
+            <label>Nombre: </label><input type="text" v-model="registro.nombre" readonly="readonly"><br>
+            <label>Apellido: </label><input type="text" v-model="registro.apellido" readonly="readonly"><br>
+            <label>Cedula: </label><input type="text" v-model="registro.cedula" readonly="readonly"><br>
+            <label>Telefono: </label><input type="text" v-model="registro.telefono" readonly="readonly"><br>
+            <label>Direccion: </label><input type="text" v-model="registro.direccion" readonly="readonly"><br>
+            <label>Correo: </label><input type="text" v-model="registro.correo" readonly="readonly"><br>
+            <label>Nombre Usuario: </label><input type="text" v-model="registro.user_name" readonly="readonly"><br>
+            <label>ID ROL: </label><input type="text" v-model="registro.id_rol" readonly="readonly"><br>
+
         </div>
     </div>
-
 </template>
 
 
@@ -27,49 +29,49 @@ export default {
                 id: "",
                 nombre: "",
                 apellido: "",
+                cedula: "",
+                telefono: "",
                 direccion: "",
                 correo: "",
                 create_date: "",
                 user_name: "",
                 id_rol: "",
             },
-            consulta_paciente: false,
         }
     },
     methods: {
         consultarUnPaciente: function () {
-            const url = "http://127.0.0.1:8000/usuario/" + this.registro.id + "/";
+            const url = "http://127.0.0.1:8000/paciente/" + this.registro.id + "/";
             axios.get(url)
-            .then((result) => {
-                this.registro.id = "";
-                this.registro.id_rol = result.data.id_rol;
-                if (this.registro.id_rol == "2") {
+                .then((result) => {
+                    this.registro.id = "";
+                    this.registro.id_rol = result.data.id_rol;
                     this.registro.nombre = result.data.nombre;
                     this.registro.apellido = result.data.apellido;
+                    this.registro.cedula = result.data.cedula;
+                    this.registro.telefono = result.data.telefono;
                     this.registro.direccion = result.data.direccion;
                     this.registro.correo = result.data.correo;
                     this.registro.create_date = result.data.create_date;
                     this.registro.user_name = result.data.user_name;
-                    this.paciente = true;
-                } else {
-                    this.registro.nombre = "";
-                    this.registro.apellido = "";
-                    this.registro.direccion = "";
-                    this.registro.correo = "";
-                    this.registro.create_date = "";
-                    this.registro.id_rol = "";
-                    this.registro.user_name = "";
-                    this.paciente = false;
-                    alert("ERROR: El ID ingresado no corresponde a un Paciente ");
-                }
-                this.consulta_paciente = true;
-            })
+                })
                 .catch((error) => {
                     alert("ERROR: Paciente no registrado " + error);
+                    this.resetForm();
                 });
         },
-        Link_Consultar_Registrado: function () {
-            this.$router.push('/user/consultaregistro')
+
+        resetForm: function () {
+            this.registro.id = "";
+            this.registro.id_rol = "";
+            this.registro.nombre = "";
+            this.registro.apellido = "";
+            this.registro.cedula = "";
+            this.registro.telefono = "";
+            this.registro.direccion = "";
+            this.registro.correo = "";
+            this.registro.create_date = "";
+            this.registro.user_name = "";
         },
     }
 }
