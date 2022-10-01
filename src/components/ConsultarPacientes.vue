@@ -96,9 +96,10 @@ body {
 
 .marco_3 {
     border: 3px solid #283747;
+    padding: 10px;
     border-radius: 20px;
     width: 70%;
-    height: 60%;
+    height: auto;
     background: white;
     display: flex;
     align-items: center;
@@ -122,7 +123,7 @@ body {
 }
 
 .consulta_registro {
-    height: 70px;
+    height: auto;
     width: 810px;
     margin: 5px 5px;
 }

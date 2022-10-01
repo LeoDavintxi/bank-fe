@@ -20,7 +20,7 @@
                 </select><br><br>
                 <button type="submit">Registrarse</button>
             </form>
-            <h5>Mintic Equipo 4<br>Todos los derechos reservados - 2022</h5>
+            
         </div>
     </div>
 
@@ -84,9 +84,10 @@ body {
 
 .contenido_registro_usuario {
     border: 3px solid #283747;
+    padding: 10px;
     border-radius: 20px;
     width: 40%;
-    height: 80%;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -117,9 +118,5 @@ body {
 .contenido_registro_usuario input,
 .selector_rol {
     width: 100%;
-}
-
-.contenido_registro_usuario h5 {
-    text-align: center;
 }
 </style>

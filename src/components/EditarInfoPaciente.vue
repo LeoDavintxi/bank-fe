@@ -1,19 +1,21 @@
 <template>
     <div class="consultar_paciente">
         <div class="contenido_consultar_paciente">
+            <h3>Editar Informacion Paciente</h3>
             <form class="formulario_consultar_paciente" v-on:submit.prevent="consultarUnPaciente">
-                <input v-model="registro.id" type="text" placeholder="ID de Usuario">
+                <input id="campoId" v-model="registro.id" type="text" placeholder="ID de Usuario">
                 <button type="submit">Consultar</button>
             </form><br><br>
-            <label>Nombre: </label><input type="text" v-model="registro.nombre" readonly="readonly"><br>
-            <label>Apellido: </label><input type="text" v-model="registro.apellido" readonly="readonly"><br>
-            <label>Cedula: </label><input type="text" v-model="registro.cedula" readonly="readonly"><br>
-            <label>Telefono: </label><input type="text" v-model="registro.telefono" readonly="readonly"><br>
-            <label>Direccion: </label><input type="text" v-model="registro.direccion" readonly="readonly"><br>
-            <label>Correo: </label><input type="text" v-model="registro.correo" readonly="readonly"><br>
-            <label>Nombre Usuario: </label><input type="text" v-model="registro.user_name" readonly="readonly"><br>
-            <label>ID ROL: </label><input type="text" v-model="registro.id_rol" readonly="readonly"><br>
-
+            <label>Nombre: </label><input type="text" v-model="registro.nombre"><br>
+            <label>Apellido: </label><input type="text" v-model="registro.apellido"><br>
+            <label>Telefono: </label><input type="text" v-model="registro.telefono"><br>
+            <label>Direccion: </label><input type="text" v-model="registro.direccion"><br>
+            <label>Correo: </label><input type="text" v-model="registro.correo"><br>
+            <label>Nombre Usuario: </label><input type="text" v-model="registro.user_name"><br>
+            <label>Contraseña: </label><input type="password" v-model="registro.password"><br>
+            
+            <input id="botonEditar" class="boton-editar" type="button" value="Editar" v-on:click="editarPaciente"
+                disabled>
         </div>
     </div>
 </template>
@@ -22,24 +24,38 @@
 <script>
 import axios from 'axios';
 export default {
-    name: 'ConsultaPaciente',
+    name: 'editarInfoPaciente',
     data: function () {
         return {
             registro: {
                 id: "",
                 nombre: "",
                 apellido: "",
-                cedula: "",
+                cedula: this.id,
                 telefono: "",
                 direccion: "",
                 correo: "",
-                create_date: "",
                 user_name: "",
-                id_rol: "",
+                id_rol: "3",
+                password: "",
             },
         }
     },
+
     methods: {
+        editarPaciente: function () {
+            const url = "http://127.0.0.1:8000/user/" + this.registro.id + "/";
+            axios.put(url, this.registro)
+                .then((result) => {
+                    alert("Edicion exitosa: " + result.status);
+                    this.resetForm();
+
+                })
+                .catch((error) => {
+                    alert("ERROR: Fallo la actualiacion del registro: " + error);
+                });
+        },
+
         consultarUnPaciente: function () {
             const url = "http://127.0.0.1:8000/paciente/" + this.registro.id + "/";
             axios.get(url)
@@ -51,8 +67,10 @@ export default {
                     this.registro.telefono = result.data.telefono;
                     this.registro.direccion = result.data.direccion;
                     this.registro.correo = result.data.correo;
-                    this.registro.create_date = result.data.create_date;
                     this.registro.user_name = result.data.user_name;
+                    this.registro.password = result.data.password;
+                    document.getElementById("botonEditar").disabled = false;
+                    document.getElementById("campoId").disabled = true;
                 })
                 .catch((error) => {
                     alert("ERROR: Paciente no registrado " + error);
@@ -71,7 +89,12 @@ export default {
             this.registro.correo = "";
             this.registro.create_date = "";
             this.registro.user_name = "";
+            this.registro.password = "";
+            document.getElementById("botonEditar").disabled = true;
+            document.getElementById("campoId").disabled = false;
         },
+
+
     }
 }
 </script>
@@ -126,8 +149,23 @@ body {
     border: 3px solid #E5E7E9;
 }
 
-.contenido_consultar_paciente input {
-    width: 60%;
+.contenido_consultar_paciente input[type=button] {
+    position: relative;
+    margin: 10px;
+    width: 95%;
+    height: 30px;
+    background: #2B63A0;
+    color: #E5E7E9;
+    border: 1px solid white;
 
+}
+
+.contenido_consultar_paciente input[type=button]:hover {
+    border: 3px solid #E5E7E9;
+    color: white;
+}
+
+.contenido_consultar_paciente input[type=text] {
+    width: 60%;
 }
 </style>
