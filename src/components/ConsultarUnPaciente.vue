@@ -44,7 +44,7 @@ export default {
             const url = "http://127.0.0.1:8000/paciente/" + this.registro.id + "/";
             axios.get(url)
                 .then((result) => {
-                    this.registro.id_rol = result.data.id_rol;
+                    this.registro.id_rol = result.data.id_rol.descripcion_rol;
                     this.registro.nombre = result.data.nombre;
                     this.registro.apellido = result.data.apellido;
                     this.registro.cedula = result.data.cedula;

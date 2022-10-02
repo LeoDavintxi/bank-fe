@@ -8,6 +8,7 @@ import Account from './components/Account.vue'
 import ConsultarUnPaciente from './components/ConsultarUnPaciente.vue'
 import ConsultarPacientes from './components/ConsultarPacientes.vue'
 import EditarInfoPaciente from './components/EditarInfoPaciente.vue'
+import AsignarMedicoPaciente from './components/AsignarMedicoPaciente.vue'
 
 
 const routes = [{
@@ -44,6 +45,11 @@ const routes = [{
         path: '/user/editarInfoPaciente',
         name: "editarInfoPaciente",
         component: EditarInfoPaciente
+    },
+    {
+        path: '/user/asignarMedicoPaciente',
+        name: "asignarMedicoPaciente",
+        component: AsignarMedicoPaciente
     },
     {
         path: '/user/account',

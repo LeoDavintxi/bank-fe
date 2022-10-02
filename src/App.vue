@@ -32,6 +32,7 @@
         <a v-on:click="consultarPacientes">Consultar Pacientes</a>
         <a v-on:click="consultarUnPaciente">Consultar un Paciente</a>
         <a v-on:click="editarInfoPaciente">Editar Info Paciente</a>
+        <a v-on:click="asignarMedicoPaciente">Asignar Medico a Paciente</a>
       </nav>
       <label for="btn-menu">✖️</label>
     </div>
@@ -97,6 +98,10 @@ export default {
 
     editarInfoPaciente: function () {
       this.$router.push({ name: "editarInfoPaciente" });
+    },
+
+    asignarMedicoPaciente: function () {
+      this.$router.push({ name: "asignarMedicoPaciente" });
     },
 
     logOut: function () {

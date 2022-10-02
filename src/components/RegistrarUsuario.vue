@@ -14,9 +14,9 @@
                     <option value="1">Administrador</option>
                     <option value="2">Auxiliar</option>
                     <option value="3">Paciente</option>
-                    <option value="4">Familiar</option>
-                    <option value="5">Medico</option>
-                    <option value="5">Enfermero</option>
+                    <option value="4">Enfermero</option>
+                    <option value="5">Familiar</option>
+                    <option value="6">Medico</option>
                 </select><br><br>
                 <button type="submit">Registrarse</button>
             </form>

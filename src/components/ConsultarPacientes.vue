@@ -34,7 +34,7 @@
                         <td v-text="item.user_name"></td>
                         <td v-text="item.fecha_registro"></td>
                         <td v-text="item.activo"></td>
-                        <td v-text="item.id_rol"></td>
+                        <td v-text="item.id_rol.descripcion_rol"></td>
                     </tr>
                 </table>
             </div>
@@ -134,14 +134,10 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 15px;
     border: 1px solid black;
-    border-spacing: 0;
+    border-spacing: 1px;
 }
 
-.consulta_registro table td {
-    border: 1px solid black;
-}
-
-.consulta_registro table th {
+.consulta_registro table td, th, tr {
     border: 1px solid black;
 }
 </style>

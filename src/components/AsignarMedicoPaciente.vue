@@ -1,21 +1,20 @@
 <template>
     <div class="consultar_paciente">
         <div class="contenido_consultar_paciente">
-            <h3>Editar Informacion Paciente</h3>
+            <h3>Asignar Medico a Paciente</h3>
             <form class="formulario_consultar_paciente" v-on:submit.prevent="consultarUnPaciente">
                 <input id="campoId" v-model="registro.id" type="text" placeholder="ID de Paciente">
                 <button type="submit">Consultar</button>
             </form><br><br>
-            <label>Nombre: </label><input type="text" v-model="registro.nombre"><br>
-            <label>Apellido: </label><input type="text" v-model="registro.apellido"><br>
-            <label>Telefono: </label><input type="text" v-model="registro.telefono"><br>
-            <label>Direccion: </label><input type="text" v-model="registro.direccion"><br>
-            <label>Correo: </label><input type="text" v-model="registro.correo"><br>
-            <label>Nombre Usuario: </label><input type="text" v-model="registro.user_name"><br>
-            <label>Contraseña: </label><input type="password" v-model="registro.password"><br>
+            <label>Nombre Paciente: </label><input type="text" v-model="registro.nombre" disabled><br><br>
+            <label>Asignar al Medico: </label>
+            <select class="selector_medico" v-model="medicoSelecionado">
+                <option value=""></option>
+                <option v-for="item in lista" v-bind:value="item.id">{{item.nombre+" "+item.apellido}}</option>
+            </select><br><br>
 
-            <input id="botonEditar" class="boton-editar" type="button" value="Editar" v-on:click="editarPaciente"
-                disabled>
+            <input id="botonAsignar" class="boton-editar" type="button" value="Asignar" v-on:click="asignarPaciente">
+            <span>Selected: {{ medicoSelecionado }}</span>
         </div>
     </div>
 </template>
@@ -30,21 +29,30 @@ export default {
             registro: {
                 id: "",
                 nombre: "",
-                apellido: "",
                 cedula: this.id,
-                telefono: "",
-                direccion: "",
-                correo: "",
-                user_name: "",
-                id_rol: "3",
-                password: "",
             },
+
+            lista: [{
+                cedula: "",
+                user_name: "",
+                nombre: "",
+                apellido: "",
+                direccion: "",
+                telefono: "",
+                correo: "",
+                fecha_registro: "",
+                activo: "",
+                id_rol: "",
+            }],
+
+            medicoSelecionado: {},
         }
     },
 
     methods: {
-        editarPaciente: function () {
-            const url = "http://127.0.0.1:8000/user/" + this.registro.id + "/";
+        asignarPaciente: function () {
+            alert("Item: " + this.medicoSelecionado)
+            /* const url = "http://127.0.0.1:8000/user/" + this.registro.id + "/";
             axios.put(url, this.registro)
                 .then((result) => {
                     alert("Edicion exitosa: " + result.status);
@@ -52,23 +60,29 @@ export default {
                 })
                 .catch((error) => {
                     alert("ERROR: Fallo la actualiacion del registro: " + error);
-                });
+                });*/
         },
 
         consultarUnPaciente: function () {
             const url = "http://127.0.0.1:8000/paciente/" + this.registro.id + "/";
             axios.get(url)
                 .then((result) => {
-                    this.registro.id_rol = result.data.id_rol.id;
-                    this.registro.nombre = result.data.nombre;
-                    this.registro.apellido = result.data.apellido;
+                    this.registro.nombre = result.data.nombre + " " + result.data.apellido;
                     this.registro.cedula = result.data.cedula;
-                    this.registro.telefono = result.data.telefono;
-                    this.registro.direccion = result.data.direccion;
-                    this.registro.correo = result.data.correo;
-                    this.registro.user_name = result.data.user_name;
-                    this.registro.password = result.data.password;
-                    document.getElementById("botonEditar").disabled = false;
+                    document.getElementById("campoId").disabled = true;
+                    this.consultarMedicos();
+                })
+                .catch((error) => {
+                    alert("ERROR: Paciente no registrado " + error);
+                    this.resetForm();
+                });
+        },
+
+        consultarMedicos: function () {
+            const url = "http://127.0.0.1:8000/medicos/";
+            axios.get(url)
+                .then((result) => {
+                    this.lista = result.data;
                     document.getElementById("campoId").disabled = true;
                 })
                 .catch((error) => {
@@ -89,7 +103,6 @@ export default {
             this.registro.create_date = "";
             this.registro.user_name = "";
             this.registro.password = "";
-            document.getElementById("botonEditar").disabled = true;
             document.getElementById("campoId").disabled = false;
         },
 
@@ -165,6 +178,10 @@ body {
 }
 
 .contenido_consultar_paciente input[type=text] {
+    width: 60%;
+}
+
+.selector_medico {
     width: 60%;
 }
 </style>
